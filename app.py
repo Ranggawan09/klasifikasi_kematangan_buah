@@ -5,7 +5,7 @@ import base64
 from werkzeug.utils import secure_filename
 import os
 import tensorflow as tf
-from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input
+from tensorflow.keras.applications import MobileNetV2, preprocess_input
 from tensorflow.keras.preprocessing import image
 
 app = Flask(__name__)
