@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Kematangan Buah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-md w-96 text-center">
+        <h1 class="text-2xl font-bold mb-4">Upload Gambar Buah</h1>
+        <input type="file" id="imageUpload" class="mb-4">
+        <button onclick="uploadImage()" class="bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
+        <p id="fruit" class="mt-4 text-lg font-semibold"></p>
+        <p id="result" class="mt-4 text-lg font-semibold"></p>
+        <img id="preview" class="mt-4 w-full hidden"/>
+    </div>
+
+    <script>
+        function uploadImage() {
+            let file = document.getElementById("imageUpload").files[0];
+            if (!file) {
+                alert("Pilih gambar terlebih dahulu!");
+                return;
+            }
+            let formData = new FormData();
+            formData.append("file", file);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById("fruit").innerText = "Jenis Buah: " + data.fruit;
+                    document.getElementById("result").innerText = "Tingkat Kematangan: " + data.ripeness;
+                    let img = document.getElementById("preview");
+                    img.src = data.image_url;
+                    img.classList.remove("hidden");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+    <br>
+    <p class="text-center">©presented_by_Rangga-Vian</p>
+</body>
+</html>
