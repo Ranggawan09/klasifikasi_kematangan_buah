@@ -11,7 +11,6 @@
         <h1 class="text-2xl font-bold mb-4">Upload Gambar Buah</h1>
         <input type="file" id="imageUpload" class="mb-4">
         <button onclick="uploadImage()" class="bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
-        <p id="fruit" class="mt-4 text-lg font-semibold"></p>
         <p id="result" class="mt-4 text-lg font-semibold"></p>
         <img id="preview" class="mt-4 w-full hidden"/>
     </div>
@@ -35,8 +34,7 @@
                 if (data.error) {
                     alert(data.error);
                 } else {
-                    document.getElementById("fruit").innerText = "Jenis Buah: " + data.fruit;
-                    document.getElementById("result").innerText = "Tingkat Kematangan: " + data.ripeness;
+                    document.getElementById("result").innerText = "Hasil: " + data.ripeness;
                     let img = document.getElementById("preview");
                     img.src = data.image_url;
                     img.classList.remove("hidden");
@@ -45,7 +43,5 @@
             .catch(error => console.error("Error:", error));
         }
     </script>
-    <br>
-    <p class="text-center">©presented_by_Rangga-Vian</p>
 </body>
 </html>

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: fruit-ripeness-app
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: API_KEY
+        value: "DEbxWv4B4sXByBVSaiaN" # Gantilah dengan API Key Roboflow kamu
